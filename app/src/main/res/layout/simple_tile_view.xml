@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<view xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tile_view"
+    class="cc.solart.dragdroplistview.sample.TileView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/contact_favorite_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true">
+
+            <ImageView
+                android:id="@+id/tile_image"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="11dp"
+                android:layout_marginTop="21dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/icon_photo"/>
+
+
+            <TextView
+                android:id="@+id/tile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp"
+                android:ellipsize="marquee"
+                android:fadingEdge="horizontal"
+                android:fadingEdgeLength="3dip"
+                android:singleLine="true"
+                android:textSize="12sp" />
+
+
+        </RelativeLayout>
+</view>

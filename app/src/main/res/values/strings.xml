@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">DragDropListView</string>
+    <string name="drag_drop_hint">长按图标可拖拽排序</string>
+</resources>
