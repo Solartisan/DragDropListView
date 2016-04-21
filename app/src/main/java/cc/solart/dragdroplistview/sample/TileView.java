@@ -36,7 +36,7 @@ import cc.solart.dragdroplistview.sample.model.SimpleDragEntity;
 public class TileView extends CardView {
     private final static String TAG = TileView.class.getSimpleName();
     private static final ClipData EMPTY_CLIP_DATA = ClipData.newPlainText("", "");
-    private ImageView mPhoto;
+    private ImageView mPin;
     private TextView mName;
     protected OnSelectedListener mListener;
     private IDragEntity mIDragEntity;
@@ -49,7 +49,7 @@ public class TileView extends CardView {
     protected void onFinishInflate() {
         super.onFinishInflate();
         mName = (TextView) findViewById(R.id.tile_name);
-        mPhoto = (ImageView) findViewById(R.id.tile_image);
+        mPin = (ImageView) findViewById(R.id.tile_pin);
 
         setOnClickListener(createClickListener());
 
@@ -82,7 +82,7 @@ public class TileView extends CardView {
         return mIDragEntity;
     }
 
-    public void loadFromContact(IDragEntity entity) {
+    public void renderData(IDragEntity entity) {
         mIDragEntity = entity;
 
         if (entity != null && entity != AbsTileAdapter.BLANK_ENTRY) {

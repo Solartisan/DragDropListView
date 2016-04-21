@@ -76,17 +76,9 @@ public abstract class AbsTileAdapter extends BaseAdapter implements
      */
     private boolean mInDragging = false;
 
-    // Pinned positions start from 1, so there are a total of 20 maximum pinned contacts
-    private static final int PIN_LIMIT = -1;
+    private int mTilesStartLimit = -1;
 
-    /**
-     * The soft limit on how many contact tiles to show.
-     * NOTE This soft limit would not restrict the number of starred contacts to show, rather
-     * 1. If the count of starred contacts is less than this limit, show 20 tiles total.
-     * 2. If the count of starred contacts is more than or equal to this limit,
-     * show all starred tiles and no frequents.
-     */
-    private static final int TILES_SOFT_LIMIT = 20;
+    private int mTilesEndLimit = Integer.MAX_VALUE;
 
     private final HashMap<Long, Integer> mItemIdTopMap = new HashMap<Long, Integer>();
     private final HashMap<Long, Integer> mItemIdLeftMap = new HashMap<Long, Integer>();
@@ -122,7 +114,30 @@ public abstract class AbsTileAdapter extends BaseAdapter implements
         mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
     }
 
+    /**
+     * thumbtack some view,start
+     * @param startLimit
+     */
+    protected void setTilesStartLimit(int startLimit){
+        mTilesStartLimit = startLimit;
+    }
 
+    public int getTilesStartLimit() {
+        return mTilesStartLimit;
+    }
+
+    /**
+     * thumbtack some view,end
+     * @param endLimit
+     */
+    protected void setTilesEndLimit(int endLimit){
+        mTilesEndLimit = endLimit;
+    }
+
+
+    public int getTilesEndLimit() {
+        return mTilesEndLimit;
+    }
     /**
      * Indicates whether a drag is in process.
      *
@@ -299,7 +314,7 @@ public abstract class AbsTileAdapter extends BaseAdapter implements
         }
         final int itemIndex = mDragEntries.indexOf(getDragEntity(view));
         if (mInDragging && mDragEnteredEntryIndex != itemIndex
-                && isIndexInBound(itemIndex) && itemIndex > PIN_LIMIT) {
+                && isIndexInBound(itemIndex) && itemIndex > mTilesStartLimit &&  itemIndex < mTilesEndLimit) {
             markDropArea(itemIndex);
         }
     }

@@ -21,6 +21,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -41,6 +42,7 @@ public class DragDropListView extends GridView implements OnDragDropListener,
     public static final String DRAG_FAVORITE_TILE = "FAVORITE_TILE";
 
     private float mTouchSlop;
+    private boolean mIsFixedHeight;
 
     private int mTopScrollBound;
     private int mBottomScrollBound;
@@ -87,16 +89,16 @@ public class DragDropListView extends GridView implements OnDragDropListener,
 
     private final AnimatorListenerAdapter mDragShadowOverAnimatorListener =
             new AnimatorListenerAdapter() {
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            if (mDragShadowBitmap != null) {
-                mDragShadowBitmap.recycle();
-                mDragShadowBitmap = null;
-            }
-            mDragShadowOverlay.setVisibility(GONE);
-            mDragShadowOverlay.setImageBitmap(null);
-        }
-    };
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    if (mDragShadowBitmap != null) {
+                        mDragShadowBitmap.recycle();
+                        mDragShadowBitmap = null;
+                    }
+                    mDragShadowOverlay.setVisibility(GONE);
+                    mDragShadowOverlay.setImageBitmap(null);
+                }
+            };
 
     public DragDropListView(Context context) {
         this(context, null);
@@ -108,7 +110,10 @@ public class DragDropListView extends GridView implements OnDragDropListener,
 
     public DragDropListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mAnimationDuration = context.getResources().getInteger(R.integer.fade_duration);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.DragDropListView);
+        mIsFixedHeight = ta.getBoolean(R.styleable.DragDropListView_fixed_type, false);
+        mAnimationDuration = ta.getInteger(R.styleable.DragDropListView_anim_duration, context.getResources().getInteger(R.integer.fade_duration));
+        ta.recycle();
         mTouchSlop = ViewConfiguration.get(context).getScaledPagingTouchSlop();
         mDragDropController.addOnDragDropListener(this);
     }
@@ -303,9 +308,12 @@ public class DragDropListView extends GridView implements OnDragDropListener,
 
     @Override
     public void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//            super.onMeasure(widthMeasureSpec,heightMeasureSpec);
-        int expandSpec = MeasureSpec.makeMeasureSpec(
-                Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
-        super.onMeasure(widthMeasureSpec, expandSpec);
+        if (!mIsFixedHeight) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        } else {
+            int expandSpec = MeasureSpec.makeMeasureSpec(
+                    Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST);
+            super.onMeasure(widthMeasureSpec, expandSpec);
+        }
     }
 }

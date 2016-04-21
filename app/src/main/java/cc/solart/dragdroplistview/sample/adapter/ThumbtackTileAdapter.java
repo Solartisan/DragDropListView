@@ -3,17 +3,20 @@ package cc.solart.dragdroplistview.sample.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import cc.solart.dragdrop.IDragEntity;
 import cc.solart.dragdrop.adapter.AbsTileAdapter;
 import cc.solart.dragdroplistview.sample.R;
 import cc.solart.dragdroplistview.sample.TileView;
 
-public class SimpleTileAdapter extends AbsTileAdapter {
+
+public class ThumbtackTileAdapter extends AbsTileAdapter {
     private TileView.OnSelectedListener mListener;
-    public SimpleTileAdapter(Context context, DragDropListener dragDropListener, TileView.OnSelectedListener listener) {
+    public ThumbtackTileAdapter(Context context, DragDropListener dragDropListener, TileView.OnSelectedListener listener) {
         super(context, dragDropListener);
         mListener = listener;
+        setTilesStartLimit(1);
     }
 
 
@@ -33,7 +36,12 @@ public class SimpleTileAdapter extends AbsTileAdapter {
         tileView.setListener(mListener);
 
         tileView.renderData(getItem(position));
-
+        ImageView pin = (ImageView) tileView.findViewById(R.id.tile_pin);
+        if(position <=1){
+            pin.setVisibility(View.VISIBLE);
+        }else {
+            pin.setVisibility(View.GONE);
+        }
 
         return tileView;
     }
