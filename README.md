@@ -2,6 +2,7 @@ DragDropListView project
 ========================
 
 This project can help developers implement drag and drop effects quickly.
+
 <img src="./preview/simple.gif">
 <img src="./preview/thumbtack.gif">
 
