@@ -3,4 +3,5 @@
     <string name="drag_drop_hint">长按图标可拖拽排序</string>
     <string name="simple">简单</string>
     <string name="thumbtack">固定某些View</string>
+    <string name="single_row">单列</string>
 </resources>

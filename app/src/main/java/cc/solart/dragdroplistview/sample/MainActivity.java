@@ -42,5 +42,14 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        Button singleRow = (Button) findViewById(R.id.single_row);
+        singleRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SingleRowActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
