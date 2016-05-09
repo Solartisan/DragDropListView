@@ -5,6 +5,7 @@ This project can help developers implement drag and drop effects quickly.
 
 <img src="./preview/single_row.gif">
 <img src="./preview/simple.gif">
+
 <img src="./preview/thumbtack.gif">
 
 Gradle
