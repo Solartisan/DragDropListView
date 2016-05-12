@@ -87,17 +87,23 @@ artifacts {
 }
 
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.key")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "android-dragdrop"                                                 // #CONFIG# project name in jcenter
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
+    try {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        user = properties.getProperty("bintray.user")
+        key = properties.getProperty("bintray.key")
+        configurations = ['archives']
+        pkg {
+            repo = "maven"
+            name = "android-dragdrop"                                                 // #CONFIG# project name in jcenter
+            websiteUrl = siteUrl
+            vcsUrl = gitUrl
+            licenses = ["Apache-2.0"]
+            publish = true
+        }
+    } catch (ex) {
+        throw new InvalidUserDataException("no local.properties file")
     }
+
 }
