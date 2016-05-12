@@ -103,7 +103,7 @@ bintray {
             publish = true
         }
     } catch (ex) {
-        throw new InvalidUserDataException("no local.properties file")
+
     }
 
 }
