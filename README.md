@@ -1,6 +1,8 @@
 DragDropListView project
 ========================
 
+Travis master: [![Build Status](https://api.travis-ci.org/Solartisan/DragDropListView.svg?branch=master)](https://travis-ci.org/Solartisan/DragDropListView)
+
 This project can help developers implement drag and drop effects quickly.
 
 <img src="./preview/single_row.gif">
